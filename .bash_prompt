@@ -51,7 +51,7 @@ prompt_git() {
         fi;
 
         # Get the short symbolic ref.
-        # If HEAD isnâ€™t a symbolic ref, get the short SHA for the latest commit
+        # If HEAD isn't a symbolic ref, get the short SHA for the latest commit
         # Otherwise, just give up.
         branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
                     git rev-parse --short HEAD 2> /dev/null || \
@@ -59,7 +59,7 @@ prompt_git() {
 
         [ -n "${s}" ] && s=" [${s}]";
 
-        echo -e "${1}(${branchName})${blue}${s}";
+        echo -e "${gitBranchStyle}(${branchName})${gitStatusStyle}${s}";
     else
         return;
     fi;
@@ -118,6 +118,13 @@ else
     hostStyle="${green}";
 fi;
 
+# Set shell prompt colors
+gitBranchStyle=${blue}
+gitStatusStyle=${cyan}
+pwdStyle=${yellow}
+arrowStyle=${green}
+continuationStyle=${yellow}
+
 # Set the terminal title to the current working directory.
 PS1="\[\033]0;\w\007\]";
 #PS1+="\[${bold}\]\n"; # newline
@@ -125,15 +132,16 @@ PS1+="\n"; # newline
 PS1+="\[${userStyle}\]\u"; # username
 PS1+="\[${hostStyle}\]@\h${cloud}"; # host
 PS1+="   "; # spacing between fields
-PS1+="\[${yellow}\]\w"; # working directory
+PS1+="\[${pwdStyle}\]\w"; # working directory
 PS1+="   "; # spacing between fields
-PS1+="\$(prompt_git \${cyan})"; # Git repository details
+PS1+="\`prompt_git\`"; # Git repository details
+#PS1+="\$(prompt_git \${cyan})"; # Git repository details
 PS1+="\n";
 #PS1+="\[${green}\]└─ \$ ▶\[${reset}\] "; # `$` (and reset color)
-PS1+="\[${green}\]└─ \$ >\[${reset}\] "; # `$` (and reset color)
+PS1+="\[${arrowStyle}\]└─ \$ >\[${reset}\] "; # `$` (and reset color)
 export PS1;
 
-PS2="\[${yellow}\]> \[${reset}\]";
+PS2="\[${continuationStyle}\]> \[${reset}\]";
 export PS2;
 
 # Old - Set the command prompt
