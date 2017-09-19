@@ -37,7 +37,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # Enable Keychain http://www.funtoo.org/Keychain
-keychain_path=$(which keychain)
+keychain_path=$(which keychain) 2>/dev/null
 if [ -x "$keychain_path" ] ; then
     eval `keychain --eval id_rsa`
 fi
