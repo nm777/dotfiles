@@ -1,1 +1,12 @@
-export PATH="~/bin:$PATH"
+#!/usr/bin/env bash
+
+add_to_path() {
+  for x in $1; do
+    case ":$PATH:" in
+      *":$x:"*) :;; # already there
+      *) export PATH="$x:$PATH";;
+    esac
+  done
+}
+
+add_to_path "$HOME/bin"
