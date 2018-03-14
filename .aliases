@@ -28,8 +28,23 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias gs='git status'
 alias gaa='git add .'
 alias gc='git commit'
+alias gca='git add . && git commit'
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
+# SSH Aliases
+alias id1="ssh -A stc81dockxv001.marconet.com"
+alias id2="ssh -A stc81dockxv002.marconet.com"
+alias id3="ssh -A stc81dockxv003.marconet.com"
+alias idev1="ssh -A dev98dockxv001.marconet.com"
+alias ed1="ssh -A stc59dockxv001.marconet.com"
+alias ed2="ssh -A stc59dockxv002.marconet.com"
+alias ed3="ssh -A stc59dockxv003.marconet.com"
+alias edev1="ssh -A dev59dockxv001.marconet.com"
+alias util1="ssh -A stc81utilxv001.marconet.com"
+alias mgmt1="ssh -A stc81mgmtxv001.marconet.com"
+alias mgmt2="ssh -A stc81mgmtxv002.marconet.com"
+alias mgmt3="ssh -A stc81mgmtxv003.marconet.com"
 
 # System defaults
 
