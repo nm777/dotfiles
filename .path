@@ -9,4 +9,4 @@ add_to_path() {
   done
 }
 
-add_to_path "$HOME/bin"
+add_to_path "$HOME/bin:$HOME/.composer/vendor/bin"
