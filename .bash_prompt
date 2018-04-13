@@ -66,9 +66,12 @@ prompt_git() {
 }
 
 cloud=""
-if grep -q "^flags.* hypervisor" /proc/cpuinfo ; then
-    #cloud="â˜ï¸ "
-    cloud="[vm]"
+if [ -d /proc ]; then
+    # We're on Linux. Check /proc/cpuinfo
+    if grep -q "^flags.* hypervisor" /proc/cpuinfo ; then
+        #cloud="â˜ï¸ "
+        cloud="[vm]"
+    fi
 fi
 
 if tput setaf 1 &> /dev/null; then
