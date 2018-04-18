@@ -56,9 +56,6 @@ alias df="df -Tha --total"
 alias du="du -ach | sort -h"
 alias free="free -mt"
 
-# grep for process info
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-
 # Show my public IP
 alias myip="curl http://ipecho.net/plain; echo"
 
@@ -68,8 +65,14 @@ alias dcm="docker-compose"
 # Things that are different between Linux and Mac
 if [ "$(uname)" == "Darwin" ]; then
     alias ps="/bin/ps -ef"
+
+    # grep for process info
+    alias psg="/bin/ps -ef | grep -v grep | grep -i -e VSZ -e"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     alias ps="ps auxf"
+
+    # grep for process info
+    alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 fi
 
 # function Extract for common file formats
