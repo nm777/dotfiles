@@ -70,6 +70,7 @@ if [ "$(uname)" == "Darwin" ]; then
     alias ps="/bin/ps -ef"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     alias ps="ps auxf"
+fi
 
 # function Extract for common file formats
 function extract {

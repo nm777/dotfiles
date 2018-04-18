@@ -50,4 +50,6 @@ if [ "$(uname)" == "Darwin" ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # Do Linux-specific things here
+    echo -n ""
 fi
