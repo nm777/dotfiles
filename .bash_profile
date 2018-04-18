@@ -43,3 +43,11 @@ if [ -x "$keychain_path" ] ; then
     eval `keychain --eval id_rsa`
 fi
 
+# Things that are different between Linux and Mac
+if [ "$(uname)" == "Darwin" ]; then
+    # Command line completion of docker commands on Mac OS
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+fi
