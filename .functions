@@ -12,7 +12,7 @@ tmux_iflist()
         done;
     elif [ "$(which ifconfig)" != "" ]; then
         # Use the older `ifconfig` command
-        DEV=$(ifconfig | grep '^[a-z]' | awk -F ':' '{print $1}');
+        DEV=$(ifconfig | grep '^[a-z]' | grep -v '^lo' | awk -F ':' '{print $1}');
         INT='';
         for i in $DEV; do
             IP=$(ifconfig $i | grep -e 'inet[^6]' | awk '{print $2}');
