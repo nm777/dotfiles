@@ -43,6 +43,9 @@ if [ -x "$keychain_path" ] ; then
     eval `keychain --eval id_rsa`
 fi
 
+# Command-line completion for git commands
+source ${DIR}/git-completion.bash
+
 # Things that are different between Linux and Mac
 if [ "$(uname)" == "Darwin" ]; then
     # Command line completion of docker commands on Mac OS
