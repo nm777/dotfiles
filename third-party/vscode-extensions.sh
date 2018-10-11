@@ -1,5 +1,6 @@
 #/bin/bash
 
+code --uninstall-extension EditorConfig.EditorConfig
 code --install-extension bmewburn.vscode-intelephense-client
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension donjayamanne.githistory
