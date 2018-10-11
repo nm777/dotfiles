@@ -30,5 +30,11 @@
     "vetur.format.styleInitialIndent": true,
     "vetur.format.scriptInitialIndent": true,
     "git.autofetch": true,
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/vendor/*/**": true
+      }
 }
