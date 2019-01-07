@@ -59,8 +59,13 @@ alias free="free -mt"
 # Show my public IP
 alias myip="curl http://ipecho.net/plain; echo"
 
-# Docker-compose shortcut
+# Application-specific aliases
 alias dcm="docker-compose"
+if code-insiders -v >/dev/null 2>&1; then
+    alias c="code-insiders";
+elif code -v >/dev/null 2>&1; then
+    alias c="code";
+fi
 
 # Things that are different between Linux and Mac
 if [ "$(uname)" == "Darwin" ]; then
