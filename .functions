@@ -26,4 +26,24 @@ tmux_iflist()
 }
 export -f tmux_iflist
 
+
+watch_app()
+{
+    APP=$1
+    if [ -z $APP ]; then
+        echo "watch_app <app_name>"
+        echo ""
+        echo "Example:"
+        echo "sh> watch_app mosaic"
+        echo ""
+        return
+    fi
+
+    CMD=""
+    for id in $(docker service ls -f name=$APP -q); do
+        CMD="${CMD} docker service ps $id && echo '' && "
+    done
+    watch "$CMD echo ''"
+}
+
 "$@"
