@@ -5,6 +5,7 @@ rsync --exclude ".git/" \
       --exclude ".gitignore" \
       --exclude "*.swp" \
       --exclude "install.sh" \
+      --exclude "third-party/" \
       -avh --no-perms . ~
 
 # Remove install.sh, if it was moved there previously
