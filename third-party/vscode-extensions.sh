@@ -35,6 +35,7 @@ fi
 "$CMD" --install-extension wwm.better-align
 "$CMD" --install-extension wesbos.theme-cobalt2
 "$CMD" --install-extension johnpapa.winteriscoming
+"$CMD" --install-extension mikestead.dotenv 
 
 echo ''
 echo 'You should also add the Fira Code fonts: https://github.com/tonsky/FiraCode'
