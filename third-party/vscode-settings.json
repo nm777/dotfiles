@@ -1,8 +1,9 @@
 {
     "diffEditor.renderSideBySide": true,
+    "editor.cursorBlinking": "phase",
     "editor.fontLigatures": true,
     "editor.fontFamily": "Fira Code, Operator Mono, Menlo, Monaco, Consolas, 'Courier New', monospace",
-    "editor.cursorBlinking": "phase",
+    "editor.formatOnSave": true,
     "editor.quickSuggestions": {
         "other": true,
         "comments": false,
