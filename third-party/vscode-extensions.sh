@@ -1,31 +1,43 @@
 #/bin/bash
 
-code --uninstall-extension EditorConfig.EditorConfig
-code --install-extension bmewburn.vscode-intelephense-client
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension donjayamanne.githistory
-code --install-extension eg2.vscode-npm-script
-code --install-extension esbenp.prettier-vscode
-code --install-extension felixfbecker.php-debug
-code --install-extension felixfbecker.php-intellisense
-code --install-extension felixfbecker.php-pack
-code --install-extension formulahendry.auto-close-tag
-code --install-extension formulahendry.auto-rename-tag
-code --install-extension HookyQR.beautify
-code --install-extension jspolancor.presentationmode
-code --install-extension mauve.terraform
-code --install-extension ms-python.python
-code --install-extension ms-vscode.csharp
-code --install-extension ms-vscode.Go
-code --install-extension ms-vscode.PowerShell
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension msjsdiag.debugger-for-chrome
-code --install-extension octref.vetur
-code --install-extension onecentlin.laravel-blade
-code --install-extension onecentlin.laravel-extension-pack
-code --install-extension onecentlin.laravel5-snippets
-code --install-extension PeterJausovec.vscode-docker
-code --install-extension ryannaddy.laravel-artisan
-code --install-extension vuetifyjs.vuetify-vscode
-code --install-extension wwm.better-align
+CMD=code
+if [ $# -gt 0 ]; then
+    CMD="$@"
+fi
 
+"$CMD" --uninstall-extension EditorConfig.EditorConfig
+"$CMD" --install-extension bmewburn.vscode-intelephense-client
+"$CMD" --install-extension dbaeumer.vscode-eslint
+"$CMD" --install-extension donjayamanne.githistory
+"$CMD" --install-extension eg2.vscode-npm-script
+"$CMD" --install-extension esbenp.prettier-vscode
+"$CMD" --install-extension felixfbecker.php-debug
+"$CMD" --install-extension felixfbecker.php-intellisense
+"$CMD" --install-extension felixfbecker.php-pack
+"$CMD" --install-extension formulahendry.auto-close-tag
+"$CMD" --install-extension formulahendry.auto-rename-tag
+"$CMD" --install-extension HookyQR.beautify
+"$CMD" --install-extension jspolancor.presentationmode
+"$CMD" --install-extension mauve.terraform
+"$CMD" --install-extension ms-python.python
+"$CMD" --install-extension ms-vscode.csharp
+"$CMD" --install-extension ms-vscode.Go
+"$CMD" --install-extension ms-vscode.PowerShell
+"$CMD" --install-extension ms-vsliveshare.vsliveshare
+"$CMD" --install-extension msjsdiag.debugger-for-chrome
+"$CMD" --install-extension octref.vetur
+"$CMD" --install-extension onecentlin.laravel-blade
+"$CMD" --install-extension onecentlin.laravel-extension-pack
+"$CMD" --install-extension onecentlin.laravel5-snippets
+"$CMD" --install-extension PeterJausovec.vscode-docker
+"$CMD" --install-extension ryannaddy.laravel-artisan
+"$CMD" --install-extension vuetifyjs.vuetify-vscode
+"$CMD" --install-extension wwm.better-align
+"$CMD" --install-extension wesbos.theme-cobalt2
+"$CMD" --install-extension johnpapa.winteriscoming
+"$CMD" --install-extension mikestead.dotenv 
+
+echo ''
+echo 'You should also add the Fira Code fonts: https://github.com/tonsky/FiraCode'
+
+"$CMD"
