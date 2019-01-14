@@ -29,6 +29,7 @@
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Cobalt2",
     "workbench.startupEditor": "welcomePage",
+    "xmlTools.splitAttributesOnFormat": true,
     "[javascript]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
