@@ -15,7 +15,7 @@
 	"New Vue component with examples": {
 		"prefix": "VueComponent",
 		"body": [
-			"<template lang=\"html\">",
+			"<template>",
 			"    <div>",
 			"    </div>",
 			"</template>",
@@ -82,7 +82,7 @@
 	"New Vue component": {
 		"prefix": "VueComponent",
 		"body": [
-			"<template lang=\"html\">",
+			"<template>",
 			"    <div>",
 			"    </div>",
 			"</template>",
