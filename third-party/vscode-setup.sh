@@ -54,10 +54,12 @@ echo ""
 "$CMD" --install-extension onecentlin.laravel-blade
 "$CMD" --install-extension onecentlin.laravel-extension-pack
 "$CMD" --install-extension onecentlin.laravel5-snippets
+"$CMD" --install-extension phiter.phpstorm-snippets
 "$CMD" --install-extension PeterJausovec.vscode-docker
 "$CMD" --install-extension ryannaddy.laravel-artisan
 "$CMD" --install-extension vuetifyjs.vuetify-vscode
 "$CMD" --install-extension wesbos.theme-cobalt2
+
 
 platform="$(uname -s)"
 vscodeSettings=""
