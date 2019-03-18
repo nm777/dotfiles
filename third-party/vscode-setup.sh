@@ -42,6 +42,7 @@ echo ""
 "$CMD" --install-extension jspolancor.presentationmode
 "$CMD" --install-extension kokororin.vscode-phpfmt
 "$CMD" --install-extension mauve.terraform
+"$CMD" --install-extension mehedidracula.php-namespace-resolver
 "$CMD" --install-extension mikestead.dotenv
 "$CMD" --install-extension ms-python.python
 "$CMD" --install-extension ms-vscode.csharp
