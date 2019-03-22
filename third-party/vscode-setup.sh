@@ -37,7 +37,7 @@ echo ""
 "$CMD" --install-extension formulahendry.auto-rename-tag
 "$CMD" --install-extension GrapeCity.gc-excelviewer
 "$CMD" --install-extension hollowtree.vue-snippets
-"$CMD" --install-extension HookyQR.beautify
+#"$CMD" --install-extension HookyQR.beautify
 "$CMD" --install-extension johnpapa.winteriscoming
 "$CMD" --install-extension jspolancor.presentationmode
 "$CMD" --install-extension kokororin.vscode-phpfmt
