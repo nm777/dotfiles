@@ -34,6 +34,7 @@
     "jenkins.pipeline.linter.connector.strictssl": false,
     "powershell.codeFormatting.preset": "OTBS",
     "powershell.powerShellExePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "prettier.printWidth": 120,
     "prettier.trailingComma": "es5",
     "vetur.format.styleInitialIndent": true,
     "vetur.format.scriptInitialIndent": true,
