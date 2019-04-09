@@ -1,3 +1,5 @@
+.DS_Store
+
 # .extra is used for system-specific settings that should not be committed
 .extra
 
