@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get install -y vim python3 python3-dev cmake
+sudo apt-get install -y vim python3 python3-dev cmake vim-gtk
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 

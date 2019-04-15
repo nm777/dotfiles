@@ -1,24 +1,39 @@
 #/bin/bash
 
+# CMD=code
+# echo ""
+# while true; do
+#     read -p "Use code-insiders? " yn
+#     case $yn in
+#         [Yy]* )
+#             CMD=code-insiders
+#             PROFILE_DIR="Code - Insiders"
+#             wget -O /tmp/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
+#             break;;
+#         [Nn]* )
+#             CMD=code
+#             PROFILE_DIR=Code
+#             wget -O /tmp/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
+#             break;;
+#     esac
+# done
+
 CMD=code
-echo "Note: The executable for VSCode must be in your path."
+PROFILE_DIR=Code
+if ! which code; then
+    echo ""
+    echo "Installing VSCode..."
+    wget -O /tmp/vscode.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
+    sudo dpkg -i /tmp/vscode.deb
+fi
+
+# https://github.com/tonsky/FiraCode
 echo ""
-while true; do
-    read -p "Use code-insiders? " yn
-    case $yn in
-        [Yy]* ) CMD=code-insiders; PROFILE_DIR="Code - Insiders"; break;;
-        [Nn]* ) CMD=code; PROFILE_DIR=code; break;;
-    esac
-done
+echo "Installing FiraCode fonts..."
+sudo apt-get update && sudo apt-get install -y fonts-firacode
 
 echo ""
-echo "*************************************************************************"
-echo "* Installing extensions for VSCode.                                     *"
-echo "*                                                                       *"
-echo "* You will need to manually add the Fira Code fonts:                    *"
-echo "* https://github.com/tonsky/FiraCode                                    *"
-echo "*************************************************************************"
-echo ""
+echo "Installing extensions for VSCode..."
 
 "$CMD" --uninstall-extension EditorConfig.EditorConfig
 
@@ -37,7 +52,6 @@ echo ""
 "$CMD" --install-extension formulahendry.auto-rename-tag
 "$CMD" --install-extension GrapeCity.gc-excelviewer
 "$CMD" --install-extension hollowtree.vue-snippets
-#"$CMD" --install-extension HookyQR.beautify
 "$CMD" --install-extension johnpapa.winteriscoming
 "$CMD" --install-extension jspolancor.presentationmode
 "$CMD" --install-extension kokororin.vscode-phpfmt
@@ -65,16 +79,30 @@ echo ""
 platform="$(uname -s)"
 vscodeSettings=""
 case "${platform}" in
-    Linux*          ) vscodeSettings="${HOME}/.config/${PROFILE_DIR}/User";;
-    Darwin*         ) vscodeSettings="${HOME}/Library/Application Support/${PROFILE_DIR}/User";;
-    CYGWIN*|MINGW*  ) vscodeSettings="$APPDATA/${PROFILE_DIR}/User";;
+    Linux*)
+        vscodeSettings="${HOME}/.config/${PROFILE_DIR}/User"
+        vscodeSettings=$(find ${HOME} -type d -ipath ${vscodeSettings})
+        ;;
+    Darwin*)
+        vscodeSettings="${HOME}/Library/Application Support/${PROFILE_DIR}/User"
+        vscodeSettings=$(find ${HOME} -type d -ipath ${vscodeSettings})
+        ;;
+    CYGWIN*|MINGW*)
+        vscodeSettings="$APPDATA/${PROFILE_DIR}/User"
+        ;;
 esac
+
+echo ""
+echo "Copying configuration..."
 
 if [ ! -z "$vscodeSettings" ]; then
     for f in $(find ./vscode -type f | sed "s|^./vscode/||"); do
+        TARGET_DIR=$(dirname ${vscodeSettings}/${f})
+        if [ ! -d ${TARGET_DIR} ]; then
+            mkdir ${TARGET_DIR}
+        fi
         echo "Copying ${f}"
         cp "./vscode/${f}" "${vscodeSettings}/${f}"
     done
 fi
 
-"$CMD"
