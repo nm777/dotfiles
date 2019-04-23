@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# docker engine
 sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo apt-get update
 
@@ -24,4 +25,20 @@ sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli container
 sudo usermod -aG docker $USER
 
 sudo systemctl enable docker
+
+
+# settings
+echo '{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "10"
+  }
+}' | sudo tee /etc/docker/daemon.json
+
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
 
