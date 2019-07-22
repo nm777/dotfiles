@@ -1,36 +1,57 @@
 #/bin/bash
 
-# CMD=code
-# echo ""
-# while true; do
-#     read -p "Use code-insiders? " yn
-#     case $yn in
-#         [Yy]* )
-#             CMD=code-insiders
-#             PROFILE_DIR="Code - Insiders"
-#             wget -O /tmp/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
-#             break;;
-#         [Nn]* )
-#             CMD=code
-#             PROFILE_DIR=Code
-#             wget -O /tmp/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
-#             break;;
-#     esac
-# done
+# The VSCode executable:
+if [ -z "$1" ]; then
+    CMD=code
 
-CMD=code
-PROFILE_DIR=Code
-if ! which code; then
-    echo ""
-    echo "Installing VSCode..."
-    wget -O /tmp/vscode.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
-    sudo dpkg -i /tmp/vscode.deb
+    # Install VSCode if it's missing
+    if ! which code; then
+        echo ""
+        echo "Installing VSCode..."
+        wget -O /tmp/vscode.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
+        sudo dpkg -i /tmp/vscode.deb
+    fi
+else
+    CMD="$1"
 fi
 
+# The directory where user settings are stored:
+platform="$(uname -s)"
+vscodeSettings=""
+if [ -z "$2" ]; then
+    case "${platform}" in
+        Linux*)
+            vscodeSettings="${HOME}/.config/Code/User"
+            ;;
+        Darwin*)
+            vscodeSettings="${HOME}/Library/Application Support/Code/User"
+            ;;
+        CYGWIN*|MINGW*)
+            vscodeSettings="$APPDATA/Code/User"
+            ;;
+    esac
+else
+    # e.g. $2 = /some/folder/code-portable-data/user-data
+    vscodeSettings="$2/User"
+fi
+
+# Fix paths that might have case issues
+case "${platform}" in
+    Linux*|Darwin*)
+        vscodeSettings=$(find / -type d -ipath "${vscodeSettings}" 2>/dev/null)
+        ;;
+esac
+
+
 # https://github.com/tonsky/FiraCode
-echo ""
-echo "Installing FiraCode fonts..."
-sudo apt-get update && sudo apt-get install -y fonts-firacode
+if which apt-get; then
+    echo ""
+    echo "Installing FiraCode fonts..."
+    sudo apt-get update && sudo apt-get install -y fonts-firacode
+else
+    echo "You should install Fira Code fonts manually:"
+    echo "https://github.com/tonsky/FiraCode"
+fi
 
 echo ""
 echo "Installing extensions for VSCode..."
@@ -76,30 +97,14 @@ echo "Installing extensions for VSCode..."
 "$CMD" --install-extension wesbos.theme-cobalt2
 
 
-platform="$(uname -s)"
-vscodeSettings=""
-case "${platform}" in
-    Linux*)
-        vscodeSettings="${HOME}/.config/${PROFILE_DIR}/User"
-        vscodeSettings=$(find ${HOME} -type d -ipath ${vscodeSettings})
-        ;;
-    Darwin*)
-        vscodeSettings="${HOME}/Library/Application Support/${PROFILE_DIR}/User"
-        vscodeSettings=$(find ${HOME} -type d -ipath ${vscodeSettings})
-        ;;
-    CYGWIN*|MINGW*)
-        vscodeSettings="$APPDATA/${PROFILE_DIR}/User"
-        ;;
-esac
-
 echo ""
 echo "Copying configuration..."
 
 if [ ! -z "$vscodeSettings" ]; then
     for f in $(find ./vscode -type f | sed "s|^./vscode/||"); do
-        TARGET_DIR=$(dirname ${vscodeSettings}/${f})
-        if [ ! -d ${TARGET_DIR} ]; then
-            mkdir ${TARGET_DIR}
+        TARGET_DIR=$(dirname "${vscodeSettings}/${f}")
+        if [ ! -d "${TARGET_DIR}" ]; then
+            mkdir "${TARGET_DIR}"
         fi
         echo "Copying ${f}"
         cp "./vscode/${f}" "${vscodeSettings}/${f}"
