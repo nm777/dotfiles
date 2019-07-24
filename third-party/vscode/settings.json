@@ -1,8 +1,9 @@
 {
   "diffEditor.renderSideBySide": true,
+  "editor.accessibilitySupport": "off",
   "editor.cursorBlinking": "phase",
-  "editor.fontLigatures": true,
   "editor.fontFamily": "Fira Code, Operator Mono, Menlo, Monaco, Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.formatOnSaveTimeout": 2000,
   "editor.quickSuggestions": {
@@ -11,6 +12,14 @@
     "strings": true
   },
   "editor.rulers": [80, 100, 120],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
   "explorer.openEditors.visible": 0,
   "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
@@ -24,25 +33,40 @@
   },
   "git.autofetch": true,
   "git.confirmSync": false,
-  "jenkins.pipeline.linter.connector.url": "https://stc81mgmtxv001.marconet.com/pipeline-model-converter/validate",
+  "html.format.wrapLineLength": 100,
   "jenkins.pipeline.linter.connector.crumbUrl": "https://stc81mgmtxv001.marconet.com/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)",
-  "jenkins.pipeline.linter.connector.user": "nate.morris",
   "jenkins.pipeline.linter.connector.strictssl": false,
+  "jenkins.pipeline.linter.connector.url": "https://stc81mgmtxv001.marconet.com/pipeline-model-converter/validate",
+  "jenkins.pipeline.linter.connector.user": "nate.morris",
+  "phpcs.enable": true,
+  "phpcs.ignorePatterns": ["*/vendor/*", "*/public/index.php"],
+  "phpcs.standard": "PSR2",
   "powershell.codeFormatting.preset": "OTBS",
   "powershell.powerShellExePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "prettier.eslintIntegration": true,
   "prettier.printWidth": 100,
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
-  "prettier.trailingComma": "es5",
+  "prettier.trailingComma": "all",
+  "search.location": "sidebar",
   "vetur.format.defaultFormatter.html": "prettier",
-  "vetur.format.scriptInitialIndent": true,
+  "vetur.format.defaultFormatter.js": "prettier-eslint",
   "vetur.format.styleInitialIndent": true,
   "window.zoomLevel": 0,
   "workbench.colorTheme": "Cobalt2",
+  "workbench.colorCustomizations": {
+    "[Cobalt2]": {
+      "gitDecoration.ignoredResourceForeground": "#444444",
+      "tab.activeBackground": "#335577"
+    }
+  },
+  "workbench.settings.editor": "json",
   "workbench.startupEditor": "welcomePage",
-  "xmlTools.splitAttributesOnFormat": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
   "[yaml]": {
     "editor.autoIndent": false
