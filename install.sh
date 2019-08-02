@@ -8,15 +8,13 @@ rsync --exclude ".git/" \
       --exclude "third-party/" \
       -avh --no-perms . ~
 
-# Remove install.sh, if it was moved there previously
-if [ -f ~/install.sh ]; then
-    rm ~/install.sh
+# Install tmux plugins
+echo "Installing tmux plugins"
+mkdir -p $HOME/.tmux/plugins 2>/dev/null
+if [ ! -d $HOME/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
-
-# Remove .git folder, if it was moved there previously
-if [ -d ~/.git ]; then
-    rm -rf ~/.git
-fi
+$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 # Refresh settings, in case new ones were loaded
 source ~/.bash_profile;
