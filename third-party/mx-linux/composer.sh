@@ -19,6 +19,6 @@ php composer-setup.php --quiet --install-dir=${HOME}/bin --filename=composer
 RESULT=$?
 rm composer-setup.php
 
-composer global require hirak/prestissimo
+${HOME}/bin/composer global require hirak/prestissimo
 
 exit $RESULT
