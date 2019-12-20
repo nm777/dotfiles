@@ -1,10 +1,14 @@
 {
+  "debug.toolBarLocation": "docked",
   "diffEditor.renderSideBySide": true,
   "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.cursorBlinking": "phase",
   "editor.fontFamily": "Fira Code, Operator Mono, Menlo, Monaco, Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.formatOnSaveTimeout": 2000,
   "editor.quickSuggestions": {
     "other": true,
@@ -15,10 +19,7 @@
   "eslint.validate": [
     "javascript",
     "javascriptreact",
-    {
-      "language": "vue",
-      "autoFix": true
-    }
+    "vue"
   ],
   "explorer.openEditors.visible": 0,
   "files.autoSave": "onFocusChange",
@@ -34,41 +35,62 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "html.format.wrapLineLength": 100,
+  "intelephense.format.enable": false,
   "jenkins.pipeline.linter.connector.crumbUrl": "https://stc81mgmtxv001.marconet.com/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)",
   "jenkins.pipeline.linter.connector.strictssl": false,
   "jenkins.pipeline.linter.connector.url": "https://stc81mgmtxv001.marconet.com/pipeline-model-converter/validate",
   "jenkins.pipeline.linter.connector.user": "nate.morris",
+  "phpcbf.onsave": true,
   "phpcs.enable": true,
   "phpcs.ignorePatterns": ["*/vendor/*", "*/public/index.php"],
+  "phpcbf.standard": "PSR2",
   "phpcs.standard": "PSR2",
+  "phpfmt.psr2": true,
+  "phpfmt.passes": [
+    "DoubleToSingleQuote",
+    "IndentTernaryConditions",
+    "SpaceBetweenMethods"
+  ],
   "powershell.codeFormatting.preset": "OTBS",
   "powershell.powerShellExePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
-  "prettier.eslintIntegration": true,
+  "prettier.disableLanguages": [
+    "javascript"
+  ],
+  "prettier.eslintIntegration": false,
   "prettier.printWidth": 100,
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "all",
   "search.location": "sidebar",
+  "terminal.integrated.scrollback": 5000,
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.format.defaultFormatter.js": "prettier-eslint",
   "vetur.format.styleInitialIndent": true,
   "window.zoomLevel": 0,
+  "workbench.activityBar.visible": true,
   "workbench.colorTheme": "Cobalt2",
   "workbench.colorCustomizations": {
     "[Cobalt2]": {
       "gitDecoration.ignoredResourceForeground": "#444444",
-      "tab.activeBackground": "#335577"
+      "tab.activeBackground": "#335577",
+      "tab.activeBorderTop": "#ffc600",
+      "statusBar.foreground": "#6f8091"
     }
   },
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "welcomePage",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
   },
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "kokororin.vscode-phpfmt",
+    "editor.formatOnSave": true
   },
   "[yaml]": {
-    "editor.autoIndent": false
+    "editor.autoIndent": "none"
   }
 }
+

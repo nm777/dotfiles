@@ -1,7 +1,24 @@
 // Place your key bindings in this file to overwrite the defaults
 [
-    {
-        "key": "ctrl+meta+j",
-        "command": "editor.action.joinLines"
-    }
+  {
+    "key": "ctrl+meta+j",
+    "command": "editor.action.joinLines"
+  },
+  {
+    "key": "ctrl+alt+d",
+    "command": "php-docblock-generator.createDocBlock"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "editor.action.transformToUppercase"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "editor.action.transformToLowercase"
+  },
+  {
+    "key": "ctrl+alt+m",
+    "command": "workbench.action.toggleMaximizedPanel"
+  }
 ]
+

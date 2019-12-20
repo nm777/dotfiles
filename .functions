@@ -46,4 +46,31 @@ watch_app()
     watch "$CMD echo ''"
 }
 
+screencast()
+{
+    SCREEN=$1
+    FPS=${2:-25}
+
+    FF=$(which ffmpeg)
+
+    if [ "$FF" == "" ]; then
+        echo "Could not find ffmpeg. Please install it."
+        exit
+    fi
+
+    OUTPUT="$HOME/Screencasts/$(date +%Y%m%d-%H%M%S).mkv"
+
+    if [ ! -d "$HOME/Screencasts" ]; then
+        mkdir -p "$HOME/Screencasts"
+    fi
+
+    if [ "$(uname)" == "Darwin" ]; then
+        # MacOS
+        ffmpeg -f avfoundation -i "$SCREEN:" $OUTPUT
+    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+        # Linux - untested
+        ffmpeg -framerate $FPS -f x11grab -i :$SCREEN.0 $OUTPUT
+    fi
+}
+
 "$@"
