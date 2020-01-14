@@ -69,6 +69,16 @@ elif code -v >/dev/null 2>&1; then
     alias c="code";
 fi
 
+# Salt Encryption
+install_salt_key() {
+    sudo apt-get update && sudo apt-get install -y gpg
+    gpg --import $HOME/salt-public-key.gpg
+    rm $HOME/salt-public-key.gpg
+}
+salt_encrypt() {
+    echo -n "$@" | gpg --armor --batch --trust-model always --encrypt -r devops
+}
+
 # Things that are different between Linux and Mac
 if [ "$(uname)" == "Darwin" ]; then
     alias ps="/bin/ps -ef"
