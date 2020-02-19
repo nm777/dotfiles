@@ -1,0 +1,55 @@
+version: '3.5'
+
+### Service Setup #############################################
+services:
+  proxy:
+    image: traefik:1.7.20-alpine
+    command:
+      - --api=true
+      - --api.entrypoint=api
+      - --defaultentrypoints=http
+      - --defaultentrypoints=https
+      - --docker=true
+      - --docker.domain=marconet.com
+      - --docker.swarmmode=true
+      - --docker.watch=true
+      - "--entrypoints=Name:api Address::8080"
+      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 Compress:true ForwardedHeaders.TrustedIPs:198.18.0.0/15 TLS TLS.MinVersion:VersionTLS12 TLS.CipherSuites:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+      - "--entrypoints=Name:wss Address::6001 Compress:true ForwardedHeaders.TrustedIPs:198.18.0.0/15 TLS TLS.MinVersion:VersionTLS12 TLS.CipherSuites:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+      - --insecureskipverify=true
+      - --loglevel=WARN
+      - --retry=true
+      - --retry.attempts=3
+    ports:
+      - 80:80
+      - 443:443
+      - 6001:6001
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        traefik.enable: "false"
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 250M
+    labels:
+      monitor.profile: "nginx/gold"
+      monitor.channel: "prod"
+    networks:
+      - proxy
+
+### Network Setup ############################################
+networks:
+  proxy:
+    driver: overlay
+    attachable: true
+
