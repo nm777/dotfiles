@@ -10,7 +10,7 @@ services:
       - --defaultentrypoints=http
       - --defaultentrypoints=https
       - --docker=true
-      - --docker.domain=marconet.com
+      - --docker.domain=somedomain.com
       - --docker.swarmmode=true
       - --docker.watch=true
       - "--entrypoints=Name:api Address::8080"
@@ -41,9 +41,6 @@ services:
         limits:
           cpus: '0.10'
           memory: 250M
-    labels:
-      monitor.profile: "nginx/gold"
-      monitor.channel: "prod"
     networks:
       - proxy
 

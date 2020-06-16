@@ -66,10 +66,10 @@ screencast()
 
     if [ "$(uname)" == "Darwin" ]; then
         # MacOS
-        ffmpeg -f avfoundation -i "$SCREEN:" $OUTPUT
+        ffmpeg -f avfoundation -capture_cursor 1 -capture_mouse_clicks 1 -i "$SCREEN:" $OUTPUT
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         # Linux - untested
-        ffmpeg -framerate $FPS -f x11grab -i :$SCREEN.0 $OUTPUT
+        ffmpeg -framerate $FPS -f x11grab -capture_cursor 1 -capture_mouse_clicks 1 -i :$SCREEN.0 $OUTPUT
     fi
 }
 
