@@ -34,6 +34,7 @@ alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 
 # Docker Aliases
 alias dsi_env="docker service inspect --format '{{range .Spec.TaskTemplate.ContainerSpec.Env}}{{println .}}{{end}}'"
+alias drun='docker run --rm -it --init -v `pwd`:/var/www'
 
 # SSH Aliases
 alias id1="ssh -A stc81dockxv001.marconet.com"
