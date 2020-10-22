@@ -50,6 +50,7 @@ screencast()
 {
     SCREEN=$1
     FPS=${2:-25}
+    AUDIO=$3
 
     FF=$(which ffmpeg)
 
@@ -66,11 +67,39 @@ screencast()
 
     if [ "$(uname)" == "Darwin" ]; then
         # MacOS
-        ffmpeg -f avfoundation -capture_cursor 1 -capture_mouse_clicks 1 -i "$SCREEN:" $OUTPUT
+        ffmpeg -f avfoundation -capture_cursor 1 -capture_mouse_clicks 1 -i "$SCREEN:$AUDIO" $OUTPUT
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         # Linux - untested
         ffmpeg -framerate $FPS -f x11grab -capture_cursor 1 -capture_mouse_clicks 1 -i :$SCREEN.0 $OUTPUT
     fi
+}
+
+php-config-path()
+{
+    php -r 'echo dirname(php_ini_loaded_file());'
+}
+
+xdebug-on()
+{
+    CONFIG_PATH=$(php-config-path)
+    XDEBUG_INI_PATH=$HOME
+    XDEBUG_INI_NAME=xdebug-ext.ini
+
+    cp -f $XDEBUG_INI_PATH/$XDEBUG_INI_NAME $CONFIG_PATH/conf.d/
+    cp -f $XDEBUG_INI_PATH/$XDEBUG_INI_NAME $CONFIG_PATH/php-fpm.d/
+
+    valet restart
+}
+
+xdebug-off()
+{
+    CONFIG_PATH=$(php-config-path)
+    XDEBUG_INI_NAME=xdebug-ext.ini
+
+    rm -f $CONFIG_PATH/conf.d/$XDEBUG_INI_NAME 2>/dev/null
+    rm -f $CONFIG_PATH/php-fpm.d/$XDEBUG_INI_NAME 2>/dev/null
+
+    valet restart
 }
 
 "$@"
