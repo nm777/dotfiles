@@ -71,6 +71,7 @@ set laststatus=2
 set hlsearch
 set ignorecase
 set cursorline
+set number
 set wildmenu
 set lazyredraw
 set showmatch
