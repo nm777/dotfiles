@@ -1,9 +1,19 @@
 #!/bin/bash
 
+if [[ -z $BASH_CONF ]]; then
+    export BASH_CONF="bash_profile"
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ "$BASH_CONF" == "bash_profile" ] && [[ -f "${DIR}/.bash_profile" ]]; then
+    # shellcheck source=/dev/null
+    source "${DIR}/.bashrc"
+fi
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 for file in ${DIR}/.{bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
     if [[ -r "$file" ]] && [[ -f "$file" ]]; then
         # shellcheck source=/dev/null
@@ -22,12 +32,16 @@ HISTCONTROL=ignoreboth
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
 
+# Attempt to save all lines of a multiple-line command in the same entry
+shopt -s cmdhist
+
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+HISTTIMEFORMAT='%F %T '
 
 # Use vim as the fc editor
 FCEDIT=vim
