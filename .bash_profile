@@ -6,7 +6,7 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ "$BASH_CONF" == "bash_profile" ] && [[ -f "${DIR}/.bash_profile" ]]; then
+if [ "$BASH_CONF" == "bash_profile" ] && [[ -f "${DIR}/.bashrc" ]]; then
     # shellcheck source=/dev/null
     source "${DIR}/.bashrc"
 fi
