@@ -79,6 +79,9 @@
 [push]
 	default = simple
 
+[pull]
+    ff = only
+
 [user]
 	name = Nate Morris
 	email = nate.morris@marconet.com
